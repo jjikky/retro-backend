@@ -1,9 +1,10 @@
 import { RecruitmentsService } from './recruitments/recruitments.service';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import appConfig from './config/app.config';
 import { ConfigModule } from '@nestjs/config';
 import { RecruitmentsController } from './recruitments/recruitments.controller';
 import { RecruitmentsModule } from './recruitments/recruitments.module';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
   imports: [
@@ -17,4 +18,8 @@ import { RecruitmentsModule } from './recruitments/recruitments.module';
   controllers: [RecruitmentsController],
   providers: [RecruitmentsService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}
