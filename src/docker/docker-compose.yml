@@ -1,0 +1,19 @@
+services:
+  mysql:
+    image: mysql:8.3.0
+    container_name: mysql8
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_USER: retro-local-user
+      MYSQL_PASSWORD: retro-local-password
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: retro-local-db
+      TZ: 'Asia/Seoul'
+    volumes:
+      - retro-mysqldb:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  retro-mysqldb:
