@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { StatusEnum } from '../../../../statuses/statuses.enum';
+import { StatusEnum } from '../../../../statuses/status.enum';
 import { StatusEntity } from 'src/statuses/infrascructure/persistence/relational/entities/status.entity';
 
 @Injectable()
