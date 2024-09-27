@@ -1,6 +1,8 @@
-import { Get, HttpStatus, HttpCode, Post, Body } from '@nestjs/common';
-import { UsersService } from './users.service';
 import { Controller } from '@nestjs/common';
+import { Get, HttpStatus, HttpCode, Post, Body } from '@nestjs/common';
+
+import { User } from './domain/user';
+import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller({
@@ -12,9 +14,8 @@ export class UsersController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() createUser: CreateUserDto): null {
-    console.log(createUser);
-    return null;
+  create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.usersService.create(createUserDto);
   }
 
   @Get()
